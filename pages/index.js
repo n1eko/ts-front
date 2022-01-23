@@ -47,7 +47,7 @@ export default function Home() {
           <code className={styles.code}>ts.n1eko.com</code>
           &nbsp;
           Users: {' '}
-          {isLoading ? (<div/>) : (<code className={styles.code}>{users.length}/64</code>)}
+          {isLoading ? (<code/>) : (<code className={styles.code}>{users.length}/64</code>)}
         </p>
         <p className={styles.reload}>
           {isLoading ? (null) : (<button onClick={updateUsers} className={styles.button}>Reload</button>)}
