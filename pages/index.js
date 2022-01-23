@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Layout from '../components/layout'
 import styles from '../styles/Home.module.css'
-import { getAllUsersForHome } from '../lib/api'
+import { getAllUsersForHome, getServerInfoForHome } from '../lib/graphql'
 import User from '../components/user'
 import { useState, useEffect } from "react";
 
@@ -9,11 +9,14 @@ export default function Home() {
   
   const [ isLoading, setIsLoading ] = useState(true);
   const [users, setUsers] = useState([]);
+  const [serverInfo, setServerInfo] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
       const data = await getAllUsersForHome();
       setUsers(data);
+      const serverInfo = await getServerInfoForHome();
+      setServerInfo(serverInfo);
       setIsLoading(false);
     }
     fetchData();
@@ -25,6 +28,8 @@ export default function Home() {
       async function fetchData() {
         const data = await getAllUsersForHome();
         setUsers(data);
+        const serverInfo = await getServerInfoForHome();
+        setServerInfo(serverInfo);
         setIsLoading(false);
       }
       fetchData();
@@ -42,13 +47,16 @@ export default function Home() {
           TS3 WEB CONSOLE
         </h1>
 
-        <p className={styles.description}>
-          IP: {' '}
-          <code className={styles.code}>ts.n1eko.com</code>
-          &nbsp;
-          Users: {' '}
-          {isLoading ? (<code/>) : (<code className={styles.code}>{users.length}/64</code>)}
-        </p>
+        <div className={styles.description}>
+          <section>IP: <code className={styles.code}>ts.n1eko.com</code></section>
+          {isLoading ? (<code/>) : (
+            <>
+              <section>Users: <code className={styles.code}>{users.length}/{serverInfo.maxClients}</code></section>
+              <section>Ping: <code className={styles.code}>{serverInfo.averagePing} ms</code></section>
+              <section>Uptime: <code className={styles.code}>{Math.round(serverInfo.uptime / 86400)} days</code></section>
+            </>
+          )}
+        </div>
         <p className={styles.reload}>
           {isLoading ? (null) : (<button onClick={updateUsers} className={styles.button}>Reload</button>)}
         </p>
