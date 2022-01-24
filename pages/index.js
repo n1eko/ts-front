@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import Layout from '../components/layout'
-import styles from '../styles/Home.module.css'
 import { getAllUsersForHome, getServerInfoForHome } from '../lib/graphql'
 import User from '../components/user'
 import { useState, useEffect } from "react";
@@ -38,30 +37,30 @@ export default function Home() {
 
   return (
     <Layout>
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>TS3 WEB CONSOLE</title>
       </Head>
-      <main className={styles.main}>
-        <h1 className={styles.title}>
+      <main>
+        <h1>
           TS3 WEB CONSOLE
         </h1>
 
-        <div className={styles.description}>
-          <section>IP: <code className={styles.code}>ts.n1eko.com</code></section>
+        <div>
+          <section>IP: <code>ts.n1eko.com</code></section>
           {isLoading ? (<code/>) : (
             <>
-              <section>Users: <code className={styles.code}>{users.length}/{serverInfo.maxClients}</code></section>
-              <section>Ping: <code className={styles.code}>{serverInfo.averagePing} ms</code></section>
-              <section>Uptime: <code className={styles.code}>{Math.round(serverInfo.uptime / 86400)} days</code></section>
+              <section>Users: <code>{users.length}/{serverInfo.maxClients}</code></section>
+              <section>Ping: <code>{serverInfo.averagePing} ms</code></section>
+              <section>Uptime: <code>{Math.round(serverInfo.uptime / 86400)} days</code></section>
             </>
           )}
         </div>
-        <p className={styles.reload}>
-          {isLoading ? (null) : (<button onClick={updateUsers} className={styles.button}>Reload</button>)}
+        <p>
+          {isLoading ? (null) : (<button onClick={updateUsers} >Reload</button>)}
         </p>
         {isLoading ? (  <p>Loading...</p> ) : (
-          <div className={styles.grid}>
+          <div>
             {users.map((user) => (
                 <User
                   key={user.id}
