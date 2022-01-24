@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Layout from '../components/layout'
 import { getAllUsersForHome, getServerInfoForHome } from '../lib/graphql'
+import Server from '../components/server'
 import User from '../components/user'
 import { useState, useEffect } from "react";
 
@@ -37,44 +38,45 @@ export default function Home() {
 
   return (
     <Layout>
+    <Head>
+      <title>TS3 WEB CONSOLE</title>
+    </Head>
     <div>
-      <Head>
-        <title>TS3 WEB CONSOLE</title>
-      </Head>
-      <main>
-        <h1>
-          TS3 WEB CONSOLE
-        </h1>
-
-        <div>
-          <section>IP: <code>ts.n1eko.com</code></section>
-          {isLoading ? (<code/>) : (
-            <>
-              <section>Users: <code>{users.length}/{serverInfo.maxClients}</code></section>
-              <section>Ping: <code>{serverInfo.averagePing} ms</code></section>
-              <section>Uptime: <code>{Math.round(serverInfo.uptime / 86400)} days</code></section>
-            </>
-          )}
+      <main className='pt-12 p-12 flex flex-wrap justify-around'>
+        <h1 className='text-xl md:text-4xl text-center'>TS3 WEB CONSOLE</h1>
+        <div className="flex flex-col md:flex-row h-screen w-screen m-3 pt-12">
+          <div className='flex-none border-4'>
+            {isLoading ? (<p>Loading...</p>) : (
+              <Server
+              clientsOnline={serverInfo.clientsOnline}
+              maxClients= {serverInfo.maxClients}
+              averagePing={serverInfo.averagePing}
+              uptime={serverInfo.uptime}
+              />
+            )}
+            <p>
+              {isLoading ? (null) : (<button className='bg-red-300 p-2 rounded mx-20 hover:bg-red-600 hover:text-white' onClick={updateUsers} >Reload</button>)}
+            </p>
+          </div>
+          <div className='flex-auto pt-6  md:flex-auto md:pl-6  border-4'>
+            {isLoading ? (  <p>Loading...</p> ) : (
+              <div>
+                {users.map((user) => (
+                  <User
+                    key={user.id}
+                    id={user.id}
+                    username={user.name}
+                    channel={user.channel}
+                    platform={user.platform}
+                    isMuted={user.isMuted}
+                    country={user.country}
+                  />
+                ))
+                }
+              </div>
+            )}
+          </div>
         </div>
-        <p>
-          {isLoading ? (null) : (<button onClick={updateUsers} >Reload</button>)}
-        </p>
-        {isLoading ? (  <p>Loading...</p> ) : (
-          <div>
-            {users.map((user) => (
-                <User
-                  key={user.id}
-                  id={user.id}
-                  username={user.name}
-                  channel={user.channel}
-                  platform={user.platform}
-                  isMuted={user.isMuted}
-                  country={user.country}
-                />
-              ))
-              }
-            </div>)}
-
       </main>
     </div>
     </Layout>
