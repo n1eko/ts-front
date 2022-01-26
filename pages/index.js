@@ -58,7 +58,7 @@ export default function Home() {
               {isLoading ? (null) : (<button className='bg-red-300 p-2 rounded mx-20 hover:bg-red-600 hover:text-white' onClick={updateUsers} >Reload</button>)}
             </div>
           </div>
-          <div className='flex-none pt-6 mt-6 md:flex-auto md:pl-6 md:ml-6 md:mt-0 border-4'>
+          <div className='flex flex-col pl-6 pt-6 mt-6 md:flex-auto md:pl-6 md:ml-6 md:mt-0 border-4'>
             {isLoading ? (  <p>Loading...</p> ) : (
               <div>
                 {users.map((user) => (
