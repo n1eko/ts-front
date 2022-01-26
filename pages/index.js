@@ -44,8 +44,8 @@ export default function Home() {
     <div>
       <main className='pt-12 p-12 flex flex-wrap justify-around'>
         <h1 className='text-xl md:text-4xl text-center'>TS3 WEB CONSOLE</h1>
-        <div className="flex flex-col md:flex-row h-screen w-screen m-3 pt-12">
-          <div className='flex-none border-4'>
+        <div className="flex flex-col md:flex-row h-min w-screen m-3 pt-12">
+          <div className='flex-none h-min border-4 p-12'>
             {isLoading ? (<p>Loading...</p>) : (
               <Server
               clientsOnline={serverInfo.clientsOnline}
@@ -54,11 +54,11 @@ export default function Home() {
               uptime={serverInfo.uptime}
               />
             )}
-            <p>
+            <div className='flex justify-around'>
               {isLoading ? (null) : (<button className='bg-red-300 p-2 rounded mx-20 hover:bg-red-600 hover:text-white' onClick={updateUsers} >Reload</button>)}
-            </p>
+            </div>
           </div>
-          <div className='flex-auto pt-6  md:flex-auto md:pl-6  border-4'>
+          <div className='flex-none pt-6 mt-6 md:flex-auto md:pl-6 md:ml-6 md:mt-0 border-4'>
             {isLoading ? (  <p>Loading...</p> ) : (
               <div>
                 {users.map((user) => (
