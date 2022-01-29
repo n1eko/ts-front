@@ -42,10 +42,10 @@ export default function Home() {
       <title>TS3 WEB CONSOLE</title>
     </Head>
     <div>
-      <main className='pt-12 p-12 flex flex-wrap justify-around'>
-        <h1 className='text-xl md:text-4xl text-center'>TS3 WEB CONSOLE</h1>
-        <div className="flex flex-col md:flex-row h-min w-screen m-3 pt-12">
-          <div className='flex-none h-min border-4 p-12'>
+      <main className='bg-custom-grey text-custom-white pt-12 p-12 flex flex-wrap justify-around'>
+        <h1 className='text-3xl font-bold md:text-4xl md:font-bold text-center'>TS3 WEB CONSOLE</h1>
+        <div className="flex flex-col md:flex-row h-screen w-screen m-3 pt-12">
+          <div className='flex-none h-min bg-custom-black justify-between items-center p-6 mt-2 shadow-xl rounded-md'>
             {isLoading ? (<p>Loading...</p>) : (
               <Server
               clientsOnline={serverInfo.clientsOnline}
@@ -54,13 +54,13 @@ export default function Home() {
               uptime={serverInfo.uptime}
               />
             )}
-            <div className='flex justify-around'>
-              {isLoading ? (null) : (<button className='bg-red-300 p-2 rounded mx-20 hover:bg-red-600 hover:text-white' onClick={updateUsers} >Reload</button>)}
+            <div className='flex justify-around mt-3'>
+              {isLoading ? (null) : (<button className='text-black bg-custom-white p-2 rounded mx-20 hover:bg-custom-yellow hover:text-custom-black' onClick={updateUsers}>Reload</button>)}
             </div>
           </div>
-          <div className='flex flex-col pl-6 pt-6 mt-6 md:flex-auto md:pl-6 md:ml-6 md:mt-0 border-4'>
+          <div className='flex flex-col p-2 mt-6 md:flex-auto md:pl-6 md:ml-6 md:mt-0'>
             {isLoading ? (  <p>Loading...</p> ) : (
-              <div>
+              <>
                 {users.map((user) => (
                   <User
                     key={user.id}
@@ -73,7 +73,7 @@ export default function Home() {
                   />
                 ))
                 }
-              </div>
+              </>
             )}
           </div>
         </div>
