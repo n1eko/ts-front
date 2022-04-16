@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Layout from '../components/layout'
-import styles from '../styles/Home.module.css'
 import { getAllUsersForHome, getServerInfoForHome } from '../lib/graphql'
+import Server from '../components/server'
 import User from '../components/user'
 import { useState, useEffect } from "react";
 
@@ -38,44 +38,45 @@ export default function Home() {
 
   return (
     <Layout>
-    <div className={styles.container}>
-      <Head>
-        <title>TS3 WEB CONSOLE</title>
-      </Head>
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          TS3 WEB CONSOLE
-        </h1>
-
-        <div className={styles.description}>
-          <section>IP: <code className={styles.code}>ts.n1eko.com</code></section>
-          {isLoading ? (<code/>) : (
-            <>
-              <section>Users: <code className={styles.code}>{users.length}/{serverInfo.maxClients}</code></section>
-              <section>Ping: <code className={styles.code}>{serverInfo.averagePing} ms</code></section>
-              <section>Uptime: <code className={styles.code}>{Math.round(serverInfo.uptime / 86400)} days</code></section>
-            </>
-          )}
+    <Head>
+      <title>TS3 WEB CONSOLE</title>
+    </Head>
+    <div>
+      <main className='bg-custom-grey text-custom-white pt-12 p-12 flex flex-wrap justify-around'>
+        <h1 className='text-4xl font-bold md:text-5xl md:font-bold text-center'>TS3 WEB CONSOLE</h1>
+        <div className="flex flex-col md:flex-row h-screen w-screen m-3 pt-12">
+          <div className='flex-none h-min bg-custom-black justify-between items-center p-6 mt-2 shadow-xl rounded-md'>
+            {isLoading ? (<p>Loading...</p>) : (
+              <Server
+              clientsOnline={serverInfo.clientsOnline - 1}
+              maxClients= {serverInfo.maxClients}
+              averagePing={serverInfo.averagePing}
+              uptime={serverInfo.uptime}
+              />
+            )}
+            <div className='flex justify-around mt-3'>
+              {isLoading ? (null) : (<button className='text-black bg-custom-white p-2 rounded mx-20 hover:bg-custom-yellow hover:text-custom-black' onClick={updateUsers}>Reload</button>)}
+            </div>
+          </div>
+          <div className='flex flex-col p-2 mt-6 md:flex-auto md:pl-6 md:ml-6 md:mt-0'>
+            {isLoading ? (  <p>Loading...</p> ) : (
+              <>
+                {users.map((user) => (
+                  <User
+                    key={user.id}
+                    id={user.id}
+                    username={user.name}
+                    channel={user.channel}
+                    platform={user.platform}
+                    isMuted={user.isMuted}
+                    country={user.country}
+                  />
+                ))
+                }
+              </>
+            )}
+          </div>
         </div>
-        <p className={styles.reload}>
-          {isLoading ? (null) : (<button onClick={updateUsers} className={styles.button}>Reload</button>)}
-        </p>
-        {isLoading ? (  <p>Loading...</p> ) : (
-          <div className={styles.grid}>
-            {users.map((user) => (
-                <User
-                  key={user.id}
-                  id={user.id}
-                  username={user.name}
-                  channel={user.channel}
-                  platform={user.platform}
-                  isMuted={user.isMuted}
-                  country={user.country}
-                />
-              ))
-              }
-            </div>)}
-
       </main>
     </div>
     </Layout>
