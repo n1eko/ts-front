@@ -36,7 +36,6 @@ Just a quick web page to check the status of the server without the need to log 
 ## Roadmap
 
 - [ ] Add Environment Variables
-- [ ] Add channel separation
 - [ ] Add grouping by channel
 - [ ] Redesign to prevent eye damage
 
