@@ -43,12 +43,12 @@ export default function Home() {
     </Head>
     <div>
       <main className='bg-custom-grey text-custom-white pt-12 p-12 flex flex-wrap justify-around'>
-        <h1 className='text-3xl font-bold md:text-4xl md:font-bold text-center'>TS3 WEB CONSOLE</h1>
+        <h1 className='text-4xl font-bold md:text-5xl md:font-bold text-center'>TS3 WEB CONSOLE</h1>
         <div className="flex flex-col md:flex-row h-screen w-screen m-3 pt-12">
           <div className='flex-none h-min bg-custom-black justify-between items-center p-6 mt-2 shadow-xl rounded-md'>
             {isLoading ? (<p>Loading...</p>) : (
               <Server
-              clientsOnline={serverInfo.clientsOnline}
+              clientsOnline={serverInfo.clientsOnline - 1}
               maxClients= {serverInfo.maxClients}
               averagePing={serverInfo.averagePing}
               uptime={serverInfo.uptime}
