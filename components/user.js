@@ -1,7 +1,7 @@
 export default function User({id, username, channel, platform, isMuted, country}) {
     return (
-        <div className="bg-custom-black flex justify-between items-center p-3 shadow-xl rounded-md mb-3">
-            <div className="font-bold">
+        <div className="bg-custom-black/50 flex justify-between items-center pl-6 p-3 pr-6 shadow-xl rounded-3xl mb-3">
+            <div className="font-black tracking-wide uppercase">
                 <h3>{username}</h3>
             </div>
             <div className="flex flex-row justify-end items-center">

@@ -42,10 +42,10 @@ export default function Home() {
       <title>TS3 WEB CONSOLE</title>
     </Head>
     <div>
-      <main className='bg-custom-grey text-custom-white pt-12 p-12 flex flex-wrap justify-around'>
-        <h1 className='text-4xl font-bold md:text-5xl md:font-bold text-center'>TS3 WEB CONSOLE</h1>
+      <main className='bg-gray-900 text-custom-white pt-12 p-12 flex flex-wrap justify-around'>
+        <h1 className='mt-1 text-4xl font-extrabold text-transparent uppercase tracking-tighest sm:text-5xl lg:text-7xl bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text'>TS3 WEB CONSOLE</h1>
         <div className="flex flex-col md:flex-row h-screen w-screen m-3 pt-12">
-          <div className='flex-none h-min bg-custom-black justify-between items-center p-6 mt-2 shadow-xl rounded-md'>
+          <div className='flex-none h-min justify-between items-center p-6 pl-20 pr-20 mt-2 border border-gray-800 rounded-3xl'>
             {isLoading ? (<p>Loading...</p>) : (
               <Server
               clientsOnline={serverInfo.clientsOnline - 1}
@@ -55,7 +55,7 @@ export default function Home() {
               />
             )}
             <div className='flex justify-around mt-3'>
-              {isLoading ? (null) : (<button className='text-black bg-custom-white p-2 rounded mx-20 hover:bg-custom-yellow hover:text-custom-black' onClick={updateUsers}>Reload</button>)}
+              {isLoading ? (null) : (<button className='p-3 text-md rounded-lg bg-gray-800/70 hover:text-blue-500' onClick={updateUsers}>Reload</button>)}
             </div>
           </div>
           <div className='flex flex-col p-2 mt-6 md:flex-auto md:pl-6 md:ml-6 md:mt-0'>
