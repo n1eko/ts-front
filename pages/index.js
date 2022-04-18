@@ -59,22 +59,31 @@ export default function Home() {
             </div>
           </div>
           <div className='flex flex-col p-2 mt-6 md:flex-auto md:pl-6 md:ml-6 md:mt-0'>
-            {isLoading ? (  <p>Loading...</p> ) : (
-              <>
-                {users.map((user) => (
-                  <User
-                    key={user.id}
-                    id={user.id}
-                    username={user.name}
-                    channel={user.channel}
-                    platform={user.platform}
-                    isMuted={user.isMuted}
-                    country={user.country}
-                  />
-                ))
-                }
-              </>
-            )}
+            {isLoading ? (  <p>Loading...</p> ) : 
+              (<>
+                {(users.length != 0) ? (
+                  <>
+                    {users.map((user) => (
+                      <User
+                        key={user.id}
+                        id={user.id}
+                        username={user.name}
+                        channel={user.channel}
+                        platform={user.platform}
+                        isMuted={user.isMuted}
+                        country={user.country}
+                      />))}
+                  </>) : 
+              (
+                <>
+                  <div className="text-center">
+                    <img className="object-cover w-full  rounded-lg" src="https://s7.gifyu.com/images/confused-travolta.gif"/>
+                    <p class="mt-6 text-white">It looks like no one is online right now.</p>
+                  </div>
+                </>
+              )
+            }
+            </>)}
           </div>
         </div>
       </main>
