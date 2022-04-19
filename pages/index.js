@@ -43,7 +43,7 @@ export default function Home() {
     </Head>
     <div>
       <main className='bg-gray-900  h-screen text-custom-white pl-12 pr-12 flex flex-wrap justify-around content-start'>
-        <h1 className='mt-1 pt-12 text-4xl font-extrabold text-transparent uppercase tracking-tighest sm:text-5xl lg:text-7xl bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text'>TS3 WEB CONSOLE</h1>
+        <h1 className='mt-1 pt-12 text-2xl font-extrabold text-transparent uppercase tracking-tighest sm:text-5xl lg:text-7xl bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text'>TS3 WEB CONSOLE</h1>
         <div className="flex flex-col md:flex-row w-screen  pt-12 m-3 ">
           <div className='flex-none h-min justify-between items-center p-6 pl-20 pr-20 mt-2 border border-gray-800 rounded-3xl'>
             {isLoading ? (<p>Loading...</p>) : (
