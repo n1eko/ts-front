@@ -1,21 +1,22 @@
 import Head from 'next/head'
 import Layout from '../components/layout'
-import { getAllUsersForHome, getServerInfoForHome } from '../lib/graphql'
+import { getAllChannelsForHome, getServerInfoForHome } from '../lib/graphql'
 import Server from '../components/server'
 import User from '../components/user'
+import Channel from '../components/channel'
 import { useState, useEffect } from "react";
 import Empty from '../components/empty'
 
 export default function Home() {
   
   const [ isLoading, setIsLoading ] = useState(true);
-  const [users, setUsers] = useState([]);
+  const [channels, setChannels] = useState([]);
   const [serverInfo, setServerInfo] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
-      const data = await getAllUsersForHome();
-      setUsers(data);
+      const data = await getAllChannelsForHome();
+      setChannels(data);
       const serverInfo = await getServerInfoForHome();
       setServerInfo(serverInfo);
       setIsLoading(false);
@@ -27,8 +28,8 @@ export default function Home() {
   const updateUsers = async () => {
     {
       async function fetchData() {
-        const data = await getAllUsersForHome();
-        setUsers(data);
+        const data = await getAllChannelsForHome();
+        setChannels(data);
         const serverInfo = await getServerInfoForHome();
         setServerInfo(serverInfo);
         setIsLoading(false);
@@ -43,7 +44,7 @@ export default function Home() {
       <title>TS3 WEB CONSOLE</title>
     </Head>
     <div>
-      <main className='bg-gray-900  h-screen text-custom-white pl-12 pr-12 flex flex-wrap justify-around content-start'>
+      <main className='bg-gray-900 h-max sm:h-screen text-custom-white pl-12 pr-12 flex flex-wrap justify-around content-start'>
         <h1 className='mt-1 pt-12 text-2xl font-extrabold text-transparent uppercase tracking-tighest sm:text-5xl lg:text-7xl bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text'>TS3 WEB CONSOLE</h1>
         <div className="flex flex-col md:flex-row w-screen  pt-12 m-3 ">
         {isLoading ? (<></>) : (
@@ -62,18 +63,30 @@ export default function Home() {
           <div className='flex flex-col p-2 mt-6 md:flex-auto md:pl-6 md:ml-6 md:mt-0'>
             {isLoading ? (  <></> ) : 
               (<>
-                {(users.length != 0) ? (
+                {(channels.length != 0) ? (
                   <>
-                    {users.map((user) => (
-                      <User
-                        key={user.id}
-                        id={user.id}
-                        username={user.name}
-                        channel={user.channel}
-                        platform={user.platform}
-                        isMuted={user.isMuted}
-                        country={user.country}
-                      />))}
+                    {channels
+                      .filter((channel) => (channel.clients.length !=0))
+                      .map((channel) => (
+                        <Channel  
+                          key={channel.id}
+                          id={channel.id}
+                          name={channel.name}
+                          channel={channel.capacity}
+                          hasPassword={channel.hasPassword}>
+                           {channel.clients.map((client) => (
+                            <User
+                            key={client.id}
+                            id={client.id}
+                            username={client.name}
+                            channel={client.channel}
+                            platform={client.platform}
+                            isMuted={client.isMuted}
+                            country={client.country}
+                            />))}
+                        </Channel>
+                        )
+                      )}
                   </>) : 
               (
                 <>

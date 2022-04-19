@@ -3,11 +3,9 @@ import Meta from "./meta";
 
 export default function Layout({children}) {
     return (
-        <>
+        <div class="flex flex-col h-screen">
             <Meta/>
-            <div>
-                <main>{children}</main>
-            </div>
-        </>
+            <main className='flex-grow'>{children}</main>
+        </div>
     )
 }
