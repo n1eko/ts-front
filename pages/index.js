@@ -44,7 +44,7 @@ export default function Home() {
       <title>TS3 WEB CONSOLE</title>
     </Head>
     <div>
-      <main className='bg-gray-900 h-max sm:h-screen text-custom-white pl-12 pr-12 flex flex-wrap justify-around content-start'>
+    <main className='bg-gray-900 h-max sm:h-screen text-custom-white pl-12 pr-12 flex flex-wrap justify-around content-start'>
         <h1 className='mt-1 pt-12 text-2xl font-extrabold text-transparent uppercase tracking-tighest sm:text-5xl lg:text-7xl bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text'>TS3 WEB CONSOLE</h1>
         <div className="flex flex-col md:flex-row w-screen  pt-12 m-3 ">
         {isLoading ? (<></>) : (
@@ -63,7 +63,7 @@ export default function Home() {
           <div className='flex flex-col p-2 mt-6 md:flex-auto md:pl-6 md:ml-6 md:mt-0'>
             {isLoading ? (  <></> ) : 
               (<>
-                {(channels.length != 0) ? (
+                {(channels.filter((channel) => (channel.clients.length !=0)).length != 0) ? (
                   <>
                     {channels
                       .filter((channel) => (channel.clients.length !=0))
