@@ -4,6 +4,7 @@ import { getAllUsersForHome, getServerInfoForHome } from '../lib/graphql'
 import Server from '../components/server'
 import User from '../components/user'
 import { useState, useEffect } from "react";
+import Empty from '../components/empty'
 
 export default function Home() {
   
@@ -76,10 +77,7 @@ export default function Home() {
                   </>) : 
               (
                 <>
-                  <div className="text-center">
-                    <img className="object-cover w-full  rounded-lg" src="https://s7.gifyu.com/images/confused-travolta.gif"/>
-                    <p class="mt-6 text-white">It looks like no one is online right now.</p>
-                  </div>
+                  <Empty/>
                 </>
               )
             }
