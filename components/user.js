@@ -3,8 +3,7 @@ export default function User ({
   username,
   channel,
   platform,
-  isMuted,
-  country
+  isMuted
 }) {
   return (
     <div className='bg-custom-black/50 flex justify-between items-center pl-6 p-3 pr-6 shadow-xl rounded-3xl mb-3'>
@@ -53,7 +52,6 @@ export default function User ({
             </svg>
           )}{' '}
         </div>
-        <div className='p-3'>{country} </div>
       </div>
     </div>
   )

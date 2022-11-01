@@ -96,7 +96,6 @@ export default function Home () {
                                 channel={client.channel}
                                 platform={client.platform}
                                 isMuted={client.isMuted}
-                                country={client.country}
                               />
                             ))}
                           </Channel>
