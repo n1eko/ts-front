@@ -34,6 +34,8 @@ export default function Home () {
         setChannels(data)
         const serverInfo = await getServerInfoForHome()
         setServerInfo(serverInfo)
+        const logInfo = await getLogInfo()
+        setLogInfo(logInfo)
         setIsLoading(false)
       }
       fetchData()
@@ -77,12 +79,13 @@ export default function Home () {
                     {isLoading ? null : (
                       <>
                       {
-                        logs.map(log => (
+                        logs.map((log, index) => (
                           <Log
-                          id={log.id}
-                          user={log.user}
-                          date={log.date}
-                          type={log.type}/>
+                            key={index}
+                            id={log.id}
+                            user={log.user}
+                            date={log.date}
+                            type={log.type}/>
                         ))
                       }
                       </>
