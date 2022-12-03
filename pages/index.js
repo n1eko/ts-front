@@ -1,8 +1,9 @@
 import Head from 'next/head'
 import Layout from '../components/layout'
-import { getAllChannelsForHome, getServerInfoForHome } from '../lib/graphql'
+import { getAllChannelsForHome, getServerInfoForHome, getLogInfo } from '../lib/graphql'
 import Server from '../components/server'
 import User from '../components/user'
+import Log from '../components/log'
 import Channel from '../components/channel'
 import { useState, useEffect } from 'react'
 import Empty from '../components/empty'
@@ -11,6 +12,7 @@ export default function Home () {
   const [isLoading, setIsLoading] = useState(true)
   const [channels, setChannels] = useState([])
   const [serverInfo, setServerInfo] = useState([])
+  const [logs, setLogInfo] = useState([])
 
   useEffect(() => {
     async function fetchData () {
@@ -18,6 +20,8 @@ export default function Home () {
       setChannels(data)
       const serverInfo = await getServerInfoForHome()
       setServerInfo(serverInfo)
+      const logInfo = await getLogInfo()
+      setLogInfo(logInfo)
       setIsLoading(false)
     }
     fetchData()
@@ -50,22 +54,39 @@ export default function Home () {
             {isLoading ? (
               <></>
             ) : (
-              <div className='flex-none h-min justify-between items-center p-6 pl-20 pr-20 mt-2 border border-gray-800 rounded-3xl'>
-                <Server
-                  clientsOnline={serverInfo.clientsOnline - 1}
-                  maxClients={serverInfo.maxClients}
-                  averagePing={serverInfo.averagePing}
-                  uptime={serverInfo.uptime}
-                />
-                <div className='flex justify-around mt-3'>
-                  {isLoading ? null : (
-                    <button
-                      className='p-3 text-md rounded-lg bg-gray-800/70 hover:text-blue-500'
-                      onClick={updateUsers}
-                    >
-                      Reload
-                    </button>
-                  )}
+              <div className='flex-none h-min justify-between items-center'>
+                <div className='flex-none h-min justify-between items-center p-6 pl-20 pr-20 mt-2 border border-gray-800 rounded-3xl'>
+                  <Server
+                    clientsOnline={serverInfo.clientsOnline - 1}
+                    maxClients={serverInfo.maxClients}
+                    averagePing={serverInfo.averagePing}
+                    uptime={serverInfo.uptime}
+                  />
+                  <div className='flex justify-around mt-3'>
+                    {isLoading ? null : (
+                      <button
+                        className='p-3 text-md rounded-lg bg-gray-800/70 hover:text-blue-500'
+                        onClick={updateUsers}
+                      >
+                        Reload
+                      </button>
+                    )}
+                  </div>
+               </div>
+               <div className='flex-col h-96 justify-around mt-3 p-5  border border-gray-800 rounded-3xl overflow-auto scrollbar-hide'>
+                    {isLoading ? null : (
+                      <>
+                      {
+                        logs.map(log => (
+                          <Log
+                          id={log.id}
+                          user={log.user}
+                          date={log.date}
+                          type={log.type}/>
+                        ))
+                      }
+                      </>
+                    )}
                 </div>
               </div>
             )}

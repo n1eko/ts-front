@@ -7,14 +7,13 @@ body {
   background-color: rgb(17 24 39 / var(--tw-bg-opacity));
 }
 
-/*
- * TODO
- */
-/* .no-scrollbar::-webkit-scrollbar {
+/* For Webkit-based browsers (Chrome, Safari and Opera) */
+.scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
 
-.no-scrollbar {
-  -ms-overflow-style: none; \/* IE and Edge *\/
-  scrollbar-width: none; \/* Firefox *\/
-}  */
+/* For IE, Edge and Firefox */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
