@@ -5,7 +5,7 @@ export default function Log ({
   type
 }) {
   return (
-    <div className='bg-custom-black/50 flex justify-between items-center pl-6 p-3 pr-6 shadow-xl rounded-3xl mb-3'>
+    <div className='flex justify-between items-center pl-6 p-3 pr-6 mb-3 '>
       <div className='flex flex-row justify-end items-center mr-5'>
       {
         type == 'disconnect' ? 

@@ -5,7 +5,7 @@ export default function Server ({
   uptime
 }) {
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col '>
       <div>
         <h2 className='text-2xl font-bold md:text-2xl md:font-bold text-center mb-3'>
           Server Status
