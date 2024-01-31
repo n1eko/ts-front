@@ -45,19 +45,19 @@ export default function Home () {
   return (
     <Layout>
       <Head>
-        <title>TS3 WEB CONSOLE</title>
+        <title>TS3 TS.N1EKO.COM</title>
       </Head>
       <div>
-        <main className='text-custom-white pl-12 pr-12 flex flex-wrap justify-around content-start'>
-          <h1 className='mt-1 pt-12 text-2xl font-extrabold text-transparent uppercase tracking-tighest sm:text-5xl lg:text-7xl bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text'>
-            TS3 WEB CONSOLE
+        <main className='text-black pl-12 pr-12 flex flex-wrap justify-around content-start'>
+          <h1 className='mt-1 pt-12 text-2xl font-extrabold text-transparent uppercase tracking-tighest sm:text-5xl lg:text-7xl bg-black bg-clip-text'>
+          TS.N1EKO.COM
           </h1>
           <div className='flex flex-col md:flex-row w-screen  pt-12 m-3 '>
             {isLoading ? (
               <></>
             ) : (
               <div className='flex-none h-min justify-between items-center'>
-                <div className='flex-none h-min justify-between items-center p-6 pl-20 pr-20 mt-2 border border-gray-800 rounded-3xl'>
+                <div className='flex-none h-min justify-between items-center p-6 pl-20 pr-20 mt-2 rounded-3xl bg-slate-50'>
                   <Server
                     clientsOnline={serverInfo.clientsOnline - 1}
                     maxClients={serverInfo.maxClients}
@@ -67,7 +67,7 @@ export default function Home () {
                   <div className='flex justify-around mt-3'>
                     {isLoading ? null : (
                       <button
-                        className='p-3 text-md rounded-lg bg-gray-800/70 hover:text-blue-500'
+                        className='p-3 text-md rounded-lg bg-slate-300 hover:text-blue-500'
                         onClick={updateUsers}
                       >
                         Reload
@@ -75,7 +75,7 @@ export default function Home () {
                     )}
                   </div>
                </div>
-               <div className='flex-col h-96 justify-around mt-3 p-5  border border-gray-800 rounded-3xl overflow-auto scrollbar-hide'>
+               <div className='flex-col h-96 justify-around mt-3 p-5 rounded-3xl overflow-auto scrollbar-hide  bg-slate-50 divide-y divide-dashed hover:divide-solid'>
                     {isLoading ? null : (
                       <>
                       {
@@ -120,6 +120,8 @@ export default function Home () {
                                 channel={client.channel}
                                 platform={client.platform}
                                 isMuted={client.isMuted}
+                                hasOutputMuted={client.hasOutputMuted}
+                                lastConnectedDate={client.lastConnectedDate}
                               />
                             ))}
                           </Channel>
